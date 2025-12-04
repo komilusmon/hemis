@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Hisoblovchi - Talabalar portali</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
+</head>
+<body>
+    <div class="container">
+        <!-- GPA Hisoblovchi qismi -->
+        <div class="calculator-section">
+            <div class="header">
+                <h1><i class="fas fa-graduation-cap"></i> GPA Hisoblovchi</h1>
+                <p>Davrni tanlang va ballaringizni kiriting</p>
+            </div>
+            
+            <div class="content">
+                <div class="period-selector">
+                    <label>Hisoblash usulini tanlang:</label>
+                    <div class="period-buttons">
+                        <button class="period-btn active" onclick="selectPeriod(1)">
+                            <i class="fas fa-calendar-week"></i> Oraliq va Joriy
+                        </button>
+                        <button class="period-btn" onclick="selectPeriod(2)">
+                            <i class="fas fa-calendar-check"></i> Yakuniy
+                        </button>
+                        <button class="period-btn" onclick="selectPeriod(3)">
+                            <i class="fas fa-calculator"></i> Jami Ball
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Oraliq va Joriy -->
+                <div id="period1" class="period-content">
+                    <div class="input-group">
+                        <label><i class="fas fa-pencil-alt"></i> Oraliq ball (maksimal 10):</label>
+                        <input type="number" id="oralig" class="input-field" placeholder="0-10 oralig'ida" min="0" max="10" step="0.1">
+                        <div class="hint">Oraliq nazorat ballari</div>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-book-open"></i> Joriy ball (maksimal 15):</label>
+                        <input type="number" id="joriy" class="input-field" placeholder="0-15 oralig'ida" min="0" max="15" step="0.1">
+                        <div class="hint">Joriy nazorat ballari</div>
+                    </div>
+                </div>
+
+                <!-- Yakuniy -->
+                <div id="period2" class="period-content hidden">
+                    <div class="input-group">
+                        <label><i class="fas fa-file-signature"></i> Yakuniy imtihon ball (maksimal 50):</label>
+                        <input type="number" id="yakuniy" class="input-field" placeholder="0-50 oralig'ida" min="0" max="50" step="0.1">
+                        <div class="hint">Yakuniy imtihon ballari</div>
+                    </div>
+                </div>
+
+                <!-- Jami Ball -->
+                <div id="period3" class="period-content hidden">
+                    <div class="input-group">
+                        <label><i class="fas fa-chart-bar"></i> Jami ball (maksimal 100):</label>
+                        <input type="number" id="jami" class="input-field" placeholder="0-100 oralig'ida" min="0" max="100" step="0.1">
+                        <div class="hint">Umumiy to'plangan ballar</div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="hisobla()">
+                    <i class="fas fa-calculator"></i> Natijani hisobla
+                </button>
+                
+                <div id="natija" class="result result-default">
+                    <div class="result-placeholder">
+                        <i class="fas fa-info-circle"></i>
+                        <div>Hisoblash usulini tanlang va ballaringizni kiriting</div>
+                    </div>
+                </div>
+
+                <!-- Statistik panel -->
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <i class="fas fa-history"></i>
+                        <div>
+                            <span class="stat-value" id="totalCalculations">0</span>
+                            <span class="stat-label">Marta hisoblandi</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <span class="stat-value" id="averageScore">0</span>
+                            <span class="stat-label">O'rtacha ball</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <span class="stat-value" id="bestScore">0</span>
+                            <span class="stat-label">Eng yaxshi natija</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p><i class="fas fa-heart"></i> Talabalar uchun maxsus ishlab chiqilgan "KomilUsmonDev" &copy; 2025</p>
+            </div>
+        </div>
+
+        <!-- Maqola va yangiliklar qismi -->
+        <div class="news-section">
+            <!-- Talabalar yangiliklari -->
+            <div class="news-card">
+                <h2><i class="fas fa-bullhorn"></i> Talabalar Yangiliklari</h2>
+                
+                <div class="article">
+                    <h3><i class="fas fa-calendar-alt"></i> Yangi o'quv yili boshlanishi</h3>
+                    <p>1-sentyabrdan boshlab yangi o'quv yili boshlandi. Talabalar uchun dars jadvallari va o'quv rejalari tayyorlandi. Yaxshi o'qish kerak, kelajak shuning uchun.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 28-Avgust, 2024</span>
+                        <a href="#" class="read-more">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <h3><i class="fas fa-money-check-alt"></i> Stipendiyalar bo'yicha yangi qoidalar</h3>
+                    <p>2024-2025 o'quv yili uchun stipendiya tayinlash bo'yicha yangi mezonlar e'lon qilindi. GPA 4.5 dan yuqori bo'lgan talabalar avtomatik ravishda stipendiyaga nomzod bo'ladilar.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 15-Avgust, 2024</span>
+                        <a href="#" class="read-more">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <h3><i class="fas fa-globe-americas"></i> Xalqaro talabalar almashinuvi dasturi</h3>
+                    <p>Yevropa va Osiyo mamlakatlariga talabalar almashinuvi dasturi boshlandi. Arizalar 30-sentyabrgacha qabul qilinadi.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 10-Avgust, 2024</span>
+                        <a href="#" class="read-more">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foydali maslahatlar -->
+            <div class="tips-card">
+                <h2><i class="fas fa-lightbulb"></i> O'qish Samaradorligini Oshirish</h2>
+                
+                <div class="tip-item">
+                    <div class="tip-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="tip-content">
+                        <strong>Vaqtni rejalashtiring</strong>
+                        <p>Har kuni kamida 2-3 soatni mustaqil o'qishga ajrating. Pomodoro texnikasidan foydalaning.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="tip-content">
+                        <strong>Faol o'qishing</strong>
+                        <p>O'qigan materialingizni qayta takrorlash va amaliy topshiriqlarni bajarish unutilmasligiga yordam beradi.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="tip-content">
+                        <strong>Guruhda o'rganing</strong>
+                        <p>Do'stlaringiz bilan muhokama qilish va murakkab mavzularni birgalikda o'rganish samaradorlikni oshiradi.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="tip-content">
+                        <strong>Sog'lom turmush tarzini saqlang</strong>
+                        <p>Yaxshi uyqu, to'g'ri ovqatlanish va jismoniy mashqlar miya faoliyatini yaxshilaydi.</p>
+                    </div>
+                </div>
+
+                <!-- Qo'shimcha mavzular -->
+                <div class="topics">
+                    <h3><i class="fas fa-tags"></i> Mashhur Mavzular:</h3>
+                    <div class="topic-tags">
+                        <span class="topic-tag">GPA</span>
+                        <span class="topic-tag">Stipendiya</span>
+                        <span class="topic-tag">Imtihon</span>
+                        <span class="topic-tag">Motivatsiya</span>
+                        <span class="topic-tag">Vaqt boshqaruvi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kalkulyator haqida -->
+            <div class="about-card">
+                <h2><i class="fas fa-info-circle"></i> Kalkulyator Haqida</h2>
+                <p>Ushbu GPA kalkulyatori talabalarga o'z ballarini tez va aniq hisoblash imkonini beradi. Quyidagi usullar qo'llaniladi:</p>
+                
+                <div class="about-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Oraliq va Joriy:</strong> Oraliq (10 ball) + Joriy (15 ball) = 25 ball</span>
+                </div>
+                
+                <div class="about-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Yakuniy imtihon:</strong> Yakuniy imtihon (50 ball)</span>
+                </div>
+                
+                <div class="about-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Jami ball:</strong> Barcha ballarni yig'indisi (100 ball)</span>
+                </div>
+                
+                <div class="about-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Baholash:</strong> 90+ = A'lo (5), 70-89 = Yaxshi (4), 60-69 = Qoniqarli (3)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
